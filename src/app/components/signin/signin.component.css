@@ -1,0 +1,113 @@
+input {
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  box-sizing: border-box;
+	border: 1px solid #EE9C21 !important;
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+input:focus {
+  outline: 0 none !important;
+  border: 1px solid #0a311e !important;
+}
+
+.primary-orange-button {
+	background: #EE9C21;
+	border: 1px solid #EE9C21;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	letter-spacing: 1.1px;
+	color: #fff;
+	font-weight: 800;
+  font-size: 18px;
+	padding: 10px;
+}
+
+.primary-orange-button:hover{
+  background-color: #fffafa !important;
+  border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border: 1px solid #EE9C21;
+	color: #EE9C21;
+}
+
+.orange-outline-button {
+  border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border: 1px solid #EE9C21;
+	color: #EE9C21;
+}
+
+.form-check-input{
+  border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+  outline: none;
+	border-color: #EE9C21 !important;
+	box-shadow: none;
+}
+
+.form-check-input:checked {
+  box-shadow: 0 0 0 3px #EE9C21;
+}
+
+::placeholder {
+  color: #EE9C21 !important;
+  opacity: 0.5;
+}
+
+  .force-opaque::placeholder {
+    opacity: 0.5;
+  }
+
+  :-ms-input-placeholder {
+    color:  #EE9C21 !important;
+  }
+
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color:  #EE9C21 !important;
+  }
+
+  .password-container{
+    position: relative;
+  }
+  .password-container input[type="password"],
+  .password-container input[type="text"]{
+    width: 100%;
+    padding: 12px 36px 12px 12px;
+    box-sizing: border-box;
+  }
+  .mdi-eye-outline{
+    position: absolute;
+    top: 28%;
+    right: 4%;
+    cursor: pointer;
+    color: lightgray;
+  }
+  .mdi-eye-off-outline{
+    position: absolute;
+    top: 28%;
+    right: 4%;
+    cursor: pointer;
+    color: lightgray;
+  }
+
+  .bhis-logo-mobile {
+    display: none;
+  }
+  
+  @media screen and (max-width: 992px) {
+    .bhis-logo-mobile {
+      display: inline-block;
+    }
+  }

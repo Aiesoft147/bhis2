@@ -1,0 +1,195 @@
+<div id="page-container"
+  class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-modern main-content-boxed">
+
+  <nav id="sidebar" style="width: 250px;">
+    <!-- Sidebar Content -->
+    <div class="sidebar-content mt-3 ">
+      <!-- Side Header -->
+      <div class="content-header justify-content-lg-center">
+        <!-- Logo -->
+        <div>
+          <a class="link-fx fw-bold tracking-wide mx-auto" href="javascript:void(0)">
+            <span class="smini-hidden">
+              <span class="fs-4 text-dual">BHIS</span><span class="fs-4 text-primary">WebApp</span>
+            </span>
+          </a>
+        </div>
+        <div>
+          <button type="button" class="btn btn-sm btn-alt-primary d-lg-none" data-toggle="layout"
+            data-action="sidebar_close">
+            <i class="fa fa-fw fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="js-sidebar-scroll">
+        <!-- Side User -->
+        <div class="content-side content-side-user px-0 py-0">
+          <div class="smini-visible-block animated fadeIn px-3">
+            <img class="img-avatar img-avatar32" src="assets/media/avatars/avatar15.jpg" alt="">
+          </div>
+          <div class="smini-hidden text-center mx-auto">
+            <a class="img-link" href="javascript:void(0)">
+              <img class="img-avatar" src="assets/media/avatars/avatar9.png" alt="User-Profile-Image">
+            </a>
+            <ul class="list-inline mt-3 mb-0">
+              <li class="list-inline-item">
+                <a class="link-fx text-dual fs-sm fw-semibold text-uppercase" href="javascript:void(0)">{{currentUser.fname}}</a>
+              </li>
+              <li class="list-inline-item"> </li>
+              <li class="list-inline-item">
+                <a class="link-fx text-dual" (click)="signOutUser()">
+                  <i class="fa fa-sign-out-alt"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <app-admin-menu *ngIf="currentUser.isAdmin"></app-admin-menu>
+        <app-staff-menu *ngIf="currentUser.isStaff == true"></app-staff-menu>
+        <app-enrollee-menu *ngIf="currentUser.isEnrollee == true"></app-enrollee-menu>
+        <app-hcp-menu *ngIf="currentUser.isSupport == true"></app-hcp-menu>
+
+      </div>
+    </div>
+  </nav>
+
+
+  <header id="page-header">
+    <div class="content-header">
+      <div class="space-x-1">
+        <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="layout" data-action="sidebar_toggle">
+          <i class="fa fa-fw fa-bars"></i>
+        </button>
+      </div>
+      <!-- END Left Section -->
+
+      <!-- Right Section -->
+      <div class="space-x-1">
+        <div class="dropdown d-inline-block">
+          <button type="button" class="btn btn-sm btn-alt-secondary" id="page-header-user-dropdown"
+            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user d-sm-none"></i>
+            <span class="d-none d-sm-inline-block fw-semibold">{{currentUser.name}}</span>
+            <i class="fa fa-angle-down opacity-50 ms-1"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0" aria-labelledby="page-header-user-dropdown">
+            <div class="px-2 py-3 bg-body-light rounded-top">
+              <h5 class="h6 text-center mb-0">
+                <span class="text-muted fs-9" *ngIf="currentUser.isAdmin">- ADMINISTRATOR -</span>
+                <span class="text-muted fs-9" *ngIf="currentUser.isSupport == true">- SUPPORT STAFF -</span>
+                <span class="text-muted fs-9" *ngIf="currentUser.isStaff == true">- REGULAR STAFF -</span>
+                <span class="text-muted fs-9" *ngIf="currentUser.isEnrollee == true">- ENROLLEE -</span>
+              </h5>
+            </div>
+            <div class="p-2">
+              <a class="dropdown-item d-flex align-items-center justify-content-between space-x-1"
+                href="javascript:void(0)">
+                <span>My Profile</span>
+                <i class="fa fa-fw fa-user opacity-25"></i>
+              </a>
+              <div class="dropdown-divider"></div>
+
+              <a class="dropdown-item d-flex align-items-center justify-content-between space-x-1"
+                href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_toggle">
+                <span>App Settings</span>
+                <i class="fa fa-fw fa-wrench opacity-25"></i>
+              </a>
+
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item d-flex align-items-center justify-content-between space-x-1"
+                (click)="signOutUser()">
+                <span>Sign Out</span>
+                <i class="fa fa-fw fa-sign-out-alt opacity-25"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="dropdown d-inline-block">
+          <button type="button" class="btn btn-sm btn-alt-secondary" id="page-header-notifications"
+            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-flag"></i>
+            <span class="text-primary">&bull;</span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications">
+            <div class="px-2 py-3 bg-body-light rounded-top">
+              <h5 class="h6 text-center mb-0">
+                Notifications
+              </h5>
+            </div>
+            <ul class="nav-items my-2 fs-sm">
+              <li>
+                <a class="text-dark d-flex py-2" href="javascript:void(0)">
+                  <div class="flex-shrink-0 me-2 ms-3">
+                    <i class="fa fa-fw fa-check text-success"></i>
+                  </div>
+                  <div class="flex-grow-1 pe-2">
+                    <p class="fw-medium mb-1">New Account Created!</p>
+                    <div class="text-muted">15 min ago</div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+            <div class="p-2 bg-body-light rounded-bottom">
+              <a class="dropdown-item text-center mb-0" href="javascript:void(0)">
+                <i class="fa fa-fw fa-flag opacity-50 me-1"></i> View All
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="d-inline-block ml-3">
+          <div class="fs-6 fw-medium"> {{today | date:'fullDate'}} {{today | date:'shortTime'}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="page-header-search" class="overlay-header bg-body-extra-light">
+      <div class="content-header">
+        <form class="w-100" action="javascript:void(0)" method="POST">
+          <div class="input-group">
+            <button type="button" class="btn btn-secondary" data-toggle="layout" data-action="header_search_off">
+              <i class="fa fa-fw fa-times"></i>
+            </button>
+
+            <input type="text" class="form-control" placeholder="Search or hit ESC.." id="page-header-search-input"
+              name="page-header-search-input">
+            <button type="submit" class="btn btn-secondary">
+              <i class="fa fa-fw fa-search"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="page-header-loader" class="overlay-header bg-primary">
+      <div class="content-header">
+        <div class="w-100 text-center">
+          <i class="far fa-sun fa-spin text-white"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-container">
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+
+  <!-- Footer -->
+  <footer id="page-footer">
+    <div class="content py-3">
+      <div class="row fs-sm">
+        <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-end">
+          Powered <i class="fa fa-heart text-danger fs-sm"></i> <a style="color: #EE9C21 !important;" class="fw-semibold"
+            href="javascript:void(0)" target="_blank"> CompulEctro InfoTech Solution</a>
+        </div>
+        <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-start">
+          <a style="color: #EE9C21 !important;" class="fw-semibold" href="javascript:void(0)" target="_blank">BHIS
+            2.0</a> &copy; <span data-toggle="year-copy"></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

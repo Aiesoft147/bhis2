@@ -1,0 +1,135 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "bhis_app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/bhis_app",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "src/assets/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css",
+              "src/assets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css",
+              "src/assets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css",
+              "src/assets/css/codebase.min.css",
+              "src/assets/css/icons.min.css",
+              "src/assets/css/responsive.css",
+              "src/assets/css/croppie.css",
+              "src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "src/assets/js/popper.min.js",
+              "src/assets/libs/bootstrap/js/bootstrap.bundle.min.js",
+              "src/assets/js/jquery.blockui.js",
+              "src/assets/js/croppie.js",
+              "src/assets/js/plugins/datatables/jquery.dataTables.min.js",
+              "src/assets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js",
+              "src/assets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js",
+              "src/assets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js",
+              "src/assets/js/plugins/datatables-buttons/dataTables.buttons.min.js",
+              "src/assets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js",
+              "src/assets/js/plugins/datatables-buttons-jszip/jszip.min.js",
+              "src/assets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js",
+              "src/assets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js",
+              "src/assets/js/plugins/datatables-buttons/buttons.print.min.js",
+              "src/assets/js/plugins/datatables-buttons/buttons.html5.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "7mb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "7mb",
+                  "maximumError": "10mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "bhis_app:build:production"
+            },
+            "development": {
+              "browserTarget": "bhis_app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "bhis_app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}

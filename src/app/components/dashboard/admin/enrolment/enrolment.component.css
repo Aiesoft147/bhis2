@@ -1,0 +1,11 @@
+.custom-box {
+  border-style: solid;
+  border-width: thin;
+  border-color: #eeecee;
+  box-shadow: 0 0 18px rgba(230, 217, 217, 0.05);
+}
+
+.nav-pills .nav-link.active {
+  background-color: #EE9C21;
+}
+

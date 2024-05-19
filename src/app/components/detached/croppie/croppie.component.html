@@ -1,0 +1,33 @@
+<!-- Modal / Profile Photo-->
+<div id="view-profile-photo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog animate__animated animate__jackInTheBox" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="border-bottom: none;">
+          <h5 class="modal-title m-auto">Crop Photo</h5>
+          <button type="button" class="btn-close ml-0" data-bs-dismiss="modal" aria-label="Close" style="top: -6px;"></button>
+        </div>
+        <div class="modal-body pb-0" style="height: auto;">
+          <!-- Add Image Picture -->
+          <div class="modal-picture-image-profile-picture">
+            <div class="modal-picture-image-profile-picture-ui">
+              <div class="mine-picture-image-demo"></div>
+              <div class="button-controls" style="margin-top: 0px !important; padding-top: 0; text-align: center;">
+                <div class="modal-profile-picture-buttons">
+                  <button type="button" class="btn btn-soft-warning font-weight-bold -rbut rotate-button-90 mr-1 display-none" title="Rotate clockwise by 90&deg; from default orientation">90&deg;</button>
+                  <button type="button" class="btn btn-soft-warning font-weight-bold -rbut rotate-button-180 mr-1 display-none" title="Rotate clockwise by 180&deg; from default orientation">180&deg;</button>
+                  <button type="button" class="btn btn-soft-warning font-weight-bold -rbut rotate-button--90 mr-1 display-none" title="Rotate counter-clockwise by -90&deg; from default orientation">-90&deg;</button>
+                  <button type="button" class="btn btn-soft-warning font-weight-bold -rbut rotate-button display-none" title="Default orientation">Default</button>
+                </div>
+                <input id="-profile-picture-image-picture" class="-profile-picture-image-picture" accept="image/*" type="file" />
+                <input id="-profile-picture-image-picture-" type="hidden" value="" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer flex-centered" style="border-top: none; place-content: center;">
+          <button type="button" class="btn btn-primary font-weight-bold picture-image-upload-save" title="Crop Image">Crop</button>
+          <button type="button" class="btn btn-outline-primary font-weight-bold picture-image-operation-cancel" data-bs-dismiss="modal" title="Close this dialog">Close</button>
+        </div>
+      </div>
+    </div>
+</div>
