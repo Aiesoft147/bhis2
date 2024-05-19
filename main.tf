@@ -12,28 +12,61 @@ resource "aws_vpc" "main" {
   }
 }
 
-# Create a public subnet
-resource "aws_subnet" "public" {
+# Create an Internet Gateway
+resource "aws_internet_gateway" "main" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = var.internet_gateway_name
+  }
+}
+
+# Create a public route table
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.main.id
+  }
+
+  tags = {
+    Name = var.public_route_table_name
+  }
+}
+
+# Create a public subnet 1
+resource "aws_subnet" "public_1" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = var.public_subnet_cidr
+  cidr_block        = var.public_subnet_1_cidr
   availability_zone = "${var.aws_region}a"
 
   tags = {
-    Name = var.public_subnet_name
+    Name = var.public_subnet_1_name
   }
 }
 
-# Create a second public subnet
-resource "aws_subnet" "public2" {
+# Create a public subnet 2
+resource "aws_subnet" "public_2" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = var.public_subnet_cidr_2
-  availability_zone = "${var.aws_region}b" # Change the availability zone if needed
+  cidr_block        = var.public_subnet_2_cidr
+  availability_zone = "${var.aws_region}b"
 
   tags = {
-    Name = var.public_subnet_name_2
+    Name = var.public_subnet_2_name
   }
 }
 
+# Associate the public subnets with the route table
+resource "aws_route_table_association" "public_1" {
+  subnet_id      = aws_subnet.public_1.id
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_route_table_association" "public_2" {
+  subnet_id      = aws_subnet.public_2.id
+  route_table_id = aws_route_table.public.id
+}
 
 # Create a private subnet
 resource "aws_subnet" "private" {
@@ -134,16 +167,12 @@ resource "aws_lb" "angular_alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.main.id]
-  subnets = [
-    aws_subnet.public.id,
-    aws_subnet.public2.id # Add the second public subnet here
-  ]
+  subnets            = [aws_subnet.public_1.id, aws_subnet.public_2.id]
 
   tags = {
     Name = var.alb_name_tag
   }
 }
-
 
 resource "aws_lb_target_group" "angular_tg" {
   name        = var.alb_target_group_name
@@ -185,10 +214,7 @@ resource "aws_ecs_service" "angular_service" {
   launch_type     = var.ecs_service_launch_type
 
   network_configuration {
-    subnets = [
-      aws_subnet.public.id,
-      aws_subnet.public2.id # Add the second public subnet here
-    ]
+    subnets          = [aws_subnet.public_1.id, aws_subnet.public_2.id]
     security_groups  = [aws_security_group.main.id]
     assign_public_ip = true
   }

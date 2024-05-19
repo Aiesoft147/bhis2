@@ -8,8 +8,13 @@ variable "vpc_cidr" {
   type        = string
 }
 
-variable "public_subnet_cidr" {
-  description = "CIDR block for the public subnet"
+variable "public_subnet_1_cidr" {
+  description = "CIDR block for the first public subnet"
+  type        = string
+}
+
+variable "public_subnet_2_cidr" {
+  description = "CIDR block for the second public subnet"
   type        = string
 }
 
@@ -48,65 +53,69 @@ variable "private_subnet_name" {
   type        = string
 }
 
-variable "public_subnet_name" {
-  description = "Name of the public subnet"
+variable "public_subnet_1_name" {
+  description = "Name of the first public subnet"
   type        = string
 }
 
-variable "public_subnet_cidr_2" {
-  description = "CIDR block for the second public subnet"
-  type        = string
-}
-
-variable "public_subnet_name_2" {
+variable "public_subnet_2_name" {
   description = "Name of the second public subnet"
   type        = string
 }
-
 
 variable "vpc_name" {
   description = "Name of the vpc"
   type        = string
 }
 
+variable "internet_gateway_name" {
+  description = "Name of the internet gateway"
+  type        = string
+}
+
+variable "public_route_table_name" {
+  description = "Name of the public route table"
+  type        = string
+}
+
 variable "ecs_task_execution_role_name" {
-  description = "The name of the IAM role for ECS Task Execution"
+  description = "Name of the ECS task execution role"
   type        = string
 }
 
 variable "ecs_task_execution_role_policy_arn" {
-  description = "The ARN of the IAM role policy attachment for ECS Task Execution"
+  description = "ARN of the ECS task execution role policy"
   type        = string
 }
 
 variable "ecs_task_definition_family" {
-  description = "The family name of the ECS task definition"
+  description = "Family name for the ECS task definition"
   type        = string
 }
 
 variable "ecs_task_memory" {
-  description = "The memory allocated for the ECS task"
+  description = "Memory for the ECS task"
   type        = string
 }
 
 variable "ecs_task_cpu" {
-  description = "The CPU allocated for the ECS task"
-  type        = string
-}
-
-variable "ecs_service_desired_count" {
-  description = "The number of desired instances of the ECS service"
-  type        = number
-}
-
-variable "ecs_service_launch_type" {
-  description = "The launch type for the ECS service"
+  description = "CPU for the ECS task"
   type        = string
 }
 
 variable "container_port" {
-  description = "The port on which the container will be running"
+  description = "Port for the container"
   type        = number
+}
+
+variable "alb_name" {
+  description = "Name of the Application Load Balancer"
+  type        = string
+}
+
+variable "alb_name_tag" {
+  description = "Tag name of the Application Load Balancer"
+  type        = string
 }
 
 variable "alb_target_group_name" {
@@ -114,24 +123,22 @@ variable "alb_target_group_name" {
   type        = string
 }
 
-variable "alb_name" {
-  description = "The name of the ALB"
+variable "alb_target_group_name_tag" {
+  description = "Tag name of the ALB target group"
   type        = string
-  default     = "angular_alb"
 }
 
 variable "alb_listener_port" {
-  description = "The port for the ALB listener"
+  description = "Listener port for the ALB"
   type        = number
-  default     = 80
 }
 
-variable "alb_name_tag" {
-  description = "The tag for the ALB name"
-  type        = string
+variable "ecs_service_desired_count" {
+  description = "Desired count of ECS service"
+  type        = number
 }
 
-variable "alb_target_group_name_tag" {
-  description = "The tag for the ALB target group name"
+variable "ecs_service_launch_type" {
+  description = "Launch type for the ECS service"
   type        = string
 }
