@@ -1,0 +1,13 @@
+span {
+    content: "\20A6";
+}
+
+.custom-box{
+  border-style: solid;
+    border-width: thin;
+    border-color: #e9e9e1;
+    box-shadow: 0 0 18px rgba(238, 156, 33, 0.04);
+}
+.nav-pills .nav-link.active {
+  background-color: #EE9C21;
+}

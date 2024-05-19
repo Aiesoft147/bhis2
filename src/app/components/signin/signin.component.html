@@ -1,0 +1,81 @@
+<main id="main-container">
+  <!-- Page Content -->
+  <div class="bg-image" style="background-image: url('assets/images/bg-start.jpg');">
+    <div class="row mx-0">
+      <div class="hero-static col-md-4 col-xl-8 d-none d-md-flex align-items-md-end">
+        <div class="p-4">
+          <p class="fs-3 fw-semibold text-white">
+          </p>
+          <p class="text-white-75 fw-medium p-5">
+            Copyright &copy; <span data-toggle="year-copy">{{currentYear}}</span>
+          </p>
+        </div>
+      </div>
+      <div class="hero-static col-md-8 col-xl-4 d-flex align-items-center bg-body-extra-light">
+        <div class="content content-full">
+          <div class="d-flex justify-content-center">
+            <img style="width: 120px; height:auto" src="assets/images/bhis_logo_m.png" class="img-fluid d-lg-none"
+              alt="BHIS Logo Mobile" />
+          </div>
+          <div class="px-4 py-2 mb-4">
+            <h1 class="h3 fw-bold mt-4 mb-2" style="color: #0a311e;">Login Portal</h1>
+            <h2 class="h5 fw-medium text-muted mb-0">Please supply account credentials</h2>
+          </div>
+          <form class="js-validation-signin px-4" [formGroup]="formStaffSignIn" (ngSubmit)="signIn($event.target)">
+            <div class="form-floating mb-4">
+              <input type="email" id="email" class="form-control" formControlName="username" required
+                data-context="email" placeholder="Username">
+              <label class="form-label" for="email">Username</label>
+            </div>
+            <!-- <label>Password</label>
+            <div class="input-group" id="show_hide_password">
+              <input class="form-control" type="password">
+              <div class="input-group-addon">
+                <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+              </div>
+            </div> -->
+
+            <div class="form-floating mb-4 password-container">
+              <input type="password" id="pwd" class="form-control" formControlName="password" required
+                data-context="password" placeholder="Password" (ngModelChange)="passMeter($event)">
+              <label class="form-label" for="password">Password</label>
+              <i id="eye" style="margin-left: -30px; cursor: pointer;"
+                class="form-group-icon-password mdi mdi-eye-outline cursor-pointer" id="togglePassword"
+                (click)="togglePasswordReveal($event.target)"></i>
+            </div>
+            <password-strength-meter *ngIf="password" [password]="password"
+              [enableFeedback]=true></password-strength-meter>
+
+            <div class="mb-4">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="login-remember-me"
+                  name="login-remember-me">
+                <label class="form-check-label" for="login-remember-me">Remember Me</label>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-lg w-50 primary-orange-button fw-semibold"
+                data-toggle="click-ripple">
+                  Sign In
+                </button>
+              </div>
+              
+              <div class="mt-6">
+              <div class="d-flex justify-content-center">
+                  <a style="color: #0a311e;" class="fs-5 fw-semibold link-fx me-2 mb-1 d-inline-block"
+                    routerLink="/signup">
+                    <i class="fa fa-user-plus" style="color: #0a311e"></i> Create Account
+                  </a>
+                  <a class="fs-sm fw-medium link-fx text-muted me-2 mb-1 d-inline-block" routerLink="/forgotpassword">
+                    Forgot Password
+                  </a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
