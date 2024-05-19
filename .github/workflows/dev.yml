@@ -11,6 +11,8 @@ jobs:
   terraform:
     name: Terraform
     runs-on: ubuntu-latest
+    env:
+      TERRAFORM_CLI_PATH: /home/runner/work/_temp/*
 
     if: github.event.pull_request.merged == true
 
@@ -21,7 +23,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 1.0.0
+          terraform_version: 1.8.3
 
       - name: Terraform Init
         run: terraform init
@@ -34,12 +36,17 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
 
-      - name: Get Terraform Outputs
-        id: output
+          id: outputs
+          run: |
+            echo "ecr_repository_url=$(terraform output -raw ecr_repository_url)" >> $GITHUB_ENV
+            echo "ecs_cluster_name=$(terraform output -raw ecs_cluster_name)" >> $GITHUB_ENV
+            echo "ecs_service_name=$(terraform output -raw ecs_service_name)" >> $GITHUB_ENV
+    
+      - name: Use Terraform Outputs
         run: |
-          echo "::set-output name=ecr_repository_url::$(terraform output -raw ecr_repository_url)"
-          echo "::set-output name=ecs_cluster_name::$(terraform output -raw ecs_cluster_name)"
-          echo "::set-output name=ecs_service_name::$(terraform output -raw ecs_service_name)"
+            echo "ECR Repository URL: ${{ env.ecr_repository_url }}"
+            echo "ECS Cluster Name: ${{ env.ecs_cluster_name }}"
+            echo "ECS Service Name: ${{ env.ecs_service_name }}"
 
   build_and_deploy:
     name: Build and Deploy Docker Image
