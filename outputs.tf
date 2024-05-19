@@ -18,3 +18,14 @@ output "alb_dns_name" {
   value       = aws_lb.angular_alb.dns_name
 }
 
+output "ecr_repository_url" {
+  value = aws_ecr_repository.angular_repo.repository_url
+}
+
+output "ecs_cluster_name" {
+  value = aws_ecs_cluster.angular_cluster.name
+}
+
+output "ecs_service_name" {
+  value = aws_ecs_service.angular_service.name
+}
