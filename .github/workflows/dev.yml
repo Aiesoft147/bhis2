@@ -37,9 +37,9 @@ jobs:
         id: outputs
         run: |
            # Run Terraform output command to get the outputs
-            ECR_REPOSITORY_URL=$(terraform output -no-color -raw ecr_repository_url)
-            ECS_CLUSTER_NAME=$(terraform output -no-color -raw ecs_cluster_name)
-            ECS_SERVICE_NAME=$(terraform output -no-color -raw ecs_service_name)
+            ECR_REPOSITORY_URL=$(terraform output -no-color ecr_repository_url)
+            ECS_CLUSTER_NAME=$(terraform output -no-color ecs_cluster_name)
+            ECS_SERVICE_NAME=$(terraform output -no-color ecs_service_name)
 
             # Save the outputs to environment variables
             echo "ecr_repository_url=$ECR_REPOSITORY_URL" >> $GITHUB_ENV
