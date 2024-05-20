@@ -36,8 +36,15 @@ jobs:
       - name: Get Terraform Outputs
         id: outputs
         run: |
-            output=$(terraform output test)
-            echo $output 
+           # Run Terraform output command to get the outputs
+            ECR_REPOSITORY_URL=$(terraform output -no-color -raw ecr_repository_url)
+            ECS_CLUSTER_NAME=$(terraform output -no-color -raw ecs_cluster_name)
+            ECS_SERVICE_NAME=$(terraform output -no-color -raw ecs_service_name)
+
+            # Save the outputs to environment variables
+            echo "ecr_repository_url=$ECR_REPOSITORY_URL" >> $GITHUB_ENV
+            echo "ecs_cluster_name=$ECS_CLUSTER_NAME" >> $GITHUB_ENV
+            echo "ecs_service_name=$ECS_SERVICE_NAME" >> $GITHUB_ENV
           
 
       - name: Use Terraform Outputs
