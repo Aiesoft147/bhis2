@@ -37,7 +37,7 @@ jobs:
         id: outputs
         run: |
             output=$(terraform output test)
-            echo $output
+            echo $output 
           
 
       - name: Use Terraform Outputs
